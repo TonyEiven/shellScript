@@ -2,7 +2,6 @@
 
 # -*- coding: utf-8 -*-
 from scapy.all import srp,Ether,ARP,conf
-import os,sys
 ipscan="10.166.6.0/24"
 try:
         ans,unans = srp(Ether(dst="FF:FF:FF:FF:FF:FF")/ARP(pdst=ipscan),timeout=2,verbose=False)
