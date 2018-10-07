@@ -146,17 +146,17 @@ def _exec(host,user,pkey):
     test.close()
 
 if __name__ == '__main__':
-    addr = "116.62.208.59"
-    apn = "FOUNDATION-AUTH"
-    instag = "10.206.119.193"
-    insport = "8088"
-    (code,statusPageUrl,healthCheckUrl,Status) = _request("focus","focus666uat",eurekaddr=addr,appname=apn,instancetag=instag,instanceport=insport)
+    addr = ""
+    apn = ""
+    instag = ""
+    insport = ""
+    (code,statusPageUrl,healthCheckUrl,Status) = _request("","",eurekaddr=addr,appname=apn,instancetag=instag,instanceport=insport)
     if code == 200:
         msg = ("Severity: Severe!!!" '\n'
         "EurekAddr: http://%s:30000/ " '\n'
         "ApplicationName: %s" '\n'
         "InstanceName: %s:%s:%s" '\n'
         "Status: %s" %(addr,apn,instag,str.lower(apn),insport,Status))
-        SendDingding(token="1b49c603ebea4980551ad4a1c316de5e4be22c11c633d5856b60b7317d6c31ae",msg=msg,mobile="15068765534")
-    _exec(host="10.200.164.8",user="root",pkey="D:\key\dev_vm_node1")
+        SendDingding(token="",msg=msg,mobile="")
+    _exec(host="",user="",pkey="")
     
