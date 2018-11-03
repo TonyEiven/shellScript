@@ -15,8 +15,8 @@ from optparse import OptionParser
 import ConfigParser
 import traceback
 
-access_key_id = 'LTAIG3zBoJrdiR17';
-access_key_secret = 'FEy161K3PkAmys5HBR7J0YBEG8HyvQ';
+access_key_id = '';
+access_key_secret = '';
 cdn_server_address = 'https://cdn.aliyuncs.com'
 
 def percent_encode(str):
@@ -65,7 +65,7 @@ def make_request(user_params, quiet=False):
     return url
 
 if __name__ == '__main__':
-    user_params = {'action':'RefreshObjectCaches','ObjectType':'Directory','ObjectPath':'https://funds.tairanmall.com/'}
+    user_params = {'action':'RefreshObjectCaches','ObjectType':'Directory','ObjectPath':'http://www.baidu.com/'}
     uri = make_request(user_params)
     print uri
     try:
