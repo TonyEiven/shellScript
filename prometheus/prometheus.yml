@@ -1,0 +1,206 @@
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+#alerting:
+#  alertmanagers:
+#  - static_configs:
+#    - targets:
+      # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+#rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prod-csp-message-admin-gateway1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.183:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-admin-gateway2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.184:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-manager-task1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.185:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-manager-task2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.186:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-msg-push1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.187:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-msg-push2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.188:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-sms-node1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.189:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-sms-node2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.190:9100']
+      labels:
+        groups: 'NodeMonitoring'
+
+  - job_name: 'prod-csp-mq-node1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.170:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-mq-node2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.171:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-nginx-node1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.167:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-nginx-node2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.168:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-registry-monitor1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.173:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-registry-config2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.174:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-auth-node1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.193:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-auth-node2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.194:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-gateway-node1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.175:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-gateway-node2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.176:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-system-storage1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.181:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-system-storage2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.182:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-token-invite1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.179:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-token-invite2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.180:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-user-tenant1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.177:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-ucenter-user-tenant2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.178:9100']
+      labels:
+        groups: 'NodeMonitoring'
+  - job_name: 'prod-csp-message-wechat1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.1:9100']
+      labels:
+        groups: 'NodeMonitoring'
+   - job_name: 'prod-csp-message-wechat2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.2:9100']
+      labels:
+        groups: 'NodeMonitoring'
+   - job_name: 'prod-csp-ucenter-captcha-notify1'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.240:9100']
+      labels:
+        groups: 'NodeMonitoring'
+   - job_name: 'prod-csp-ucenter-captcha-notify2'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.206.119.241:9100']
+      labels:
+        groups: 'NodeMonitoring'
+
+
+  - job_name: 'ft-mysql-master-58-node'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.211.6.58:9100']
+      labels:
+        groups: 'MysqlMonitoring'
+
+  - job_name: 'ft-mysql-master-58'
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['10.211.6.58:9104']
+      labels:
+        groups: 'MysqlMonitoring'

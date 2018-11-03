@@ -1,0 +1,119 @@
+发布流程：
+
+1、确认待迁移的服务已经在阿里云ecs上正常运行,确认发布时需要挂维护的页面【运维：徐彪】    <<<结束>>>
+2、下沙gateway正常发布（用户数据获取通道依旧保持通过gateway取下沙数据），不涉及更改代理操作【开发：陈旭，运维：徐彪】   <<<结束>>>
+3、停服更新时间保持和电商一致，e卡挂维护页【开发：王帅杰，运维：徐彪】     <<<结束>>>
+4、迁移数据（下沙数据迁移至阿里云，迁移bill数据）【开发：王树辉，DBA：侯涛】
+5、数据迁移完成，资产NG增加ecard代理, 支付NG修改ecard代理到funds-gateway
+6、资产管理第二台nginx上线(slb增加监听),支付中心nginx上线
+6、取消维护页测试
+7、去除funds.tairanmall.com CDN    <<<结束>>>
+8、RN修改epay域名
+
+
+pc挂维护页:
+rewrite ^/personal/ecard_list.html$ http://pay.tairanmall.com/update redirect;
+
+###上线完成之后去除
+location ^~ /api/v3/ecard-dew/card/account/ {
+	proxy_pass  http://epay.tairanmall.com/gateway/ecard/account/;
+}
+
+
+funds-NG增加配置:(nginx.conf)
+upstream funds-ecard {
+	server 10.206.59.107:8080 fail_timeout=3s;
+	server 10.206.59.108:8080 fail_timeout=3s;
+}
+
+upstream funds-redpacket {
+	server 10.206.59.102:8080 fail_timeout=3s;
+	server 10.206.59.103:8080 fail_timeout=3s;
+}
+
+
+location ^~ /api/v3/ecard-dew/ {
+	proxy_pass http://funds-ecard/ecard/;
+
+}
+
+funds-NG修改配置:(nginx.conf)
+upstream  funds-api-gateway {
+    server 10.206.59.105:7001 fail_timeout=3s;
+    server 10.206.59.106:7001 fail_timeout=3s;
+}
+
+location ^~ /api/v3/gateway/ {
+    proxy_pass  http://funds-api-gateway/gateway/;
+}
+
+
+
+支付中心nginx修改配置:(nginx.conf)
+
+upstream  funds-api-gateway {
+	server 10.206.59.105:7001 fail_timeout=3s;
+	server 10.206.59.105:7001 fail_timeout=3s;
+}
+
+删除ecard-dew upstream
+location ^~ /api/v3/ecard-dew/ {
+	proxy_pass http://funds.tairanmall.com/api/v3/ecard-dew/;
+	#proxy_pass http://epay.tairanmall.com/api/v3/ecard-dew/;
+}
+
+支付中心nginx添加host:
+101.37.135.95  funds.tairanmall.com
+
+
+
+funds-NG lsb地址:    101.37.135.95
+
+funds-NG修改配置:(fundsadmin.conf)
+
+location ^~ /funds-ecard-admin/ {
+	proxy_pass   http://funds-ecard/ecard/;
+}
+
+location ^~ /api/v3/ecard/admin/ {
+	proxy_pass http://funds-ecard/ecard/admin/;
+}
+
+location ^~ /api/v3/ecard-dew/redpacket/ {
+	proxy_pass http://funds-redpacket/redpacket/;
+}
+
+
+
+
+
+##################################################
+##################我是分界线######################
+##################################################
+
+
+####funds#####
+#早起打卡获取e卡列表
+location ^~ /api/v3/ecard-dew/ {
+	proxy_pass http://pay.tairanmall.com/api/v3/ecard-dew/;
+}
+
+
+#调E卡红包的接口
+location ^~ /api/v3/gateway/ {
+	proxy_pass   http://epay.tairanmall.com/api/v3/gateway/;
+}
+
+
+
+
+
+####pay#####
+####调node-gateway程旭的网关
+location ^~ /api/v3/gateway/ {
+	proxy_pass  http://funds-api-gateway/gateway/;
+}
+
+location ^~ /api/v3/ecard-dew/ {
+	proxy_pass http://ecard-dew/ecard-dew/;
+}
