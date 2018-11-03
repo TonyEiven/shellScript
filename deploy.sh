@@ -1,18 +1,18 @@
 #!/bin/bash
-##admin_1_ip="10.206.119.210"
-##admin_2_ip="10.206.119.211"
+##admin_1_ip=""
+##admin_2_ip=""
 ##定义基础变量
 ##---------------------------------------------
 Basename=message-admin
 dates=`date '+%Y-%m-%d'`
-ins_1_ip=47.97.102.225
-ins_2_ip=47.97.102.198
-user=csp
-passwd=csp30000uat
-eureka_api=http://47.97.101.140:30000/eureka/apps/
+ins_1_ip=
+ins_2_ip=
+user=
+passwd=
+eureka_api=http://ipaddress:30000/eureka/apps/
 app_name=MESSAGE-ADMIN
-instance_ID_1=10.206.119.210:message-admin:7070
-instance_ID_2=10.206.119.211:message-admin:7070
+instance_ID_1=iapddress:message-admin:7070
+instance_ID_2=ipaddress:message-admin:7070
 ins_dir=/data/admin/
 pkg_name=admin.jar
 ##---------------------------------------------
@@ -33,7 +33,7 @@ function backup(){
 		scp $WORKSPACE/service/kernel/admin/target/${pkg_name} $message_jenkins_stor_dir
 		##jar包远程存放目录
 		scp -i /root/.ssh/uat-focus-es $WORKSPACE/service/kernel/admin/target/${pkg_name} root@10.200.147.9:$remote_stor_dir
-        scp -i /root/.ssh/prod-mijin $WORKSPACE/service/kernel/admin/target/${pkg_name} upload@118.31.54.200:$remote_stor_dir
+        scp -i /root/.ssh/prod-mijin $WORKSPACE/service/kernel/admin/target/${pkg_name} upload@ipaddress:$remote_stor_dir
         
 }
 
