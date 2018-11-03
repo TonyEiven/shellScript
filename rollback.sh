@@ -1,13 +1,13 @@
 #!/bin/bash
 ##---------------------------------------------
 ##应用地址数组定义
-ACCOUNT_REST_ADDR=(10.206.59.80 10.206.59.81)
-ACTIVITY_REST_ADDR=(10.206.59.94 10.206.59.95)
-BALANCE_REST_ADDR=(10.206.59.84 10.206.59.85)
-BILL_REST_ADDR=(10.206.59.82 10.206.59.83)
-CLOCK_REST_ADDR=(10.206.59.96 10.206.59.97)
-MESSAGE_REST_ADDR=(10.206.59.92 10.206.59.93)
-SCORE_REST_ADDR=(10.206.59.87 10.206.59.88)
+ACCOUNT_REST_ADDR=()
+ACTIVITY_REST_ADDR=()
+BALANCE_REST_ADDR=()
+BILL_REST_ADDR=()
+CLOCK_REST_ADDR=()
+MESSAGE_REST_ADDR=()
+SCORE_REST_ADDR=()
 ##应用实例ID数组定义
 ACCOUNT_REST_ID=(prod_funds_score_account1:funds-account-rest:8080 prod_funds_score_account2:funds-account-rest:8080)
 ACTIVITY_REST_ID=(prod-funds-score-clock1:funds-activity-rest:8081 prod-funds-score-clock2:funds-activity-rest:8081)
@@ -36,11 +36,11 @@ FUNDS-SCORE-REST)
 ##---------------------------------------------
 ##定义基础变量
 DATE=$(date +%Y-%m-%d)
-USER=admin
-PASSWD=Funds2018
-EUREKA_API=http://10.206.59.76:3000/eureka/apps/
-KEY=/root/.ssh/prod_funds_score
-LOCAL_DIR=/data/backup/prod-score/
+USER=
+PASSWD=
+EUREKA_API=http://ipaddress:3000/eureka/apps/
+KEY=
+LOCAL_DIR=
 
 ##---------------------------------------------
 ##公共函数
@@ -52,7 +52,7 @@ function shutdown(){
 		##,return code MUST be "200" if Application has been successfully been shutdown, Exception
 		##code was predefined below.
 		return_body="SUCCESS"
-		res=$(curl -XPOST -H "Content-Type: application/json" -d '{"user":"admin","password":"Funds2018"}' http://$1)
+		res=$(curl -XPOST -H "Content-Type: application/json" -d '{"user":"","password":""}' http://$1)
 		if [[ $res == $return_body ]];then
 			echo $res
 		else
