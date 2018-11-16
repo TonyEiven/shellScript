@@ -4,8 +4,8 @@
 # Description: url health check 
 
 # uri variables needed to be montioring.
-SYNC_URI="https://box.trc.com/data-sync/zhicheng/share"
-ADMIN_URI="https://box.trc.com/data-admin/apiv1/captcha"
+SYNC_URI=""
+ADMIN_URI=""
 RESULTOUTPUT=/data/scripts/pkg/result
 
 function monitoring(){
@@ -40,10 +40,10 @@ while (true)
 do
 	monitoring $SYNC_URI 30
 	if [[ $? != 0 ]];then
-		notify "https://oapi.dingtalk.com/robot/send?access_token=1b49c603ebea4980551ad4a1c316de5e4be22c11c633d5856b60b7317d6c31ae" \"$SYNC_URI 接口异常\"
+		notify "" \"$SYNC_URI 接口异常\"
 	fi
 	monitoring $ADMIN_URI 60
 	if [[ $? != 0 ]];then
-                notify "https://oapi.dingtalk.com/robot/send?access_token=1b49c603ebea4980551ad4a1c316de5e4be22c11c633d5856b60b7317d6c31ae" \"$ADMIN_URI 接口异常\"
+                notify "" \"$ADMIN_URI 接口异常\"
         fi
 done
