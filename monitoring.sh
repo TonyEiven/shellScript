@@ -40,10 +40,10 @@ while (true)
 do
 	monitoring $SYNC_URI 30
 	if [[ $? != 0 ]];then
-		notify "" \"$SYNC_URI 接口异常\"
+		notify "" "$SYNC_URI 接口异常"
 	fi
 	monitoring $ADMIN_URI 60
 	if [[ $? != 0 ]];then
-                notify "" \"$ADMIN_URI 接口异常\"
+                notify "" "$ADMIN_URI 接口异常"
         fi
 done
